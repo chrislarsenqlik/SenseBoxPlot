@@ -51,6 +51,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 		// resize: function() {
   //       },
 		paint : function($element,layout) {
+
 			var _this = this,
 				   id = "sb_" + layout.qInfo.qId;
 
@@ -129,6 +130,26 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 			max = Math.max.apply(Math, measureArray);
 			//End Data Load
 		    
+		    //Set X and Y axis titles
+		    var xAxisTitle;
+			var yAxisTitle;
+			var titleint=1;
+			$.each(this.backendApi.getDimensionInfos(), function(key, value) {
+				
+                console.log(titleint)
+
+                if (titleint === 1) {
+                	xAxisTitle = value.qFallbackTitle;
+                	titleint = titleint+1
+                }
+                
+                if (titleint === 2) {
+                	yAxisTitle = value.qFallbackTitle;
+                }
+            });
+
+			// console.log('x title: '+xAxisTitle);
+			// console.log('y title: '+yAxisTitle);
 
 		    ////Bring in Data from CSV to test
 			// var mydata = new Array();
@@ -590,7 +611,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 			        .attr("text-anchor", "middle")  
 			        .style("font-size", "18px") 
 			        //.style("text-decoration", "underline")  
-			        .text("Revenue");
+			        .text(xAxisTitle);
 			 
 				 // draw y axis
 				svg.append("g")
@@ -602,7 +623,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 					  .attr("dy", ".71em")
 					  .style("text-anchor", "end")
 					  .style("font-size", "16px") 
-					  .text("");		
+					  .text(yAxisTitle);		
 				
 				// draw x axis	
 				svg.append("g")
