@@ -51,7 +51,6 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 		// resize: function() {
   //       },
 		paint : function($element,layout) {
-
 			var _this = this,
 				   id = "sb_" + layout.qInfo.qId;
 
@@ -63,7 +62,6 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
             }
 
    			var destElement = document.getElementById(id);
-
 
    			//Bring in Data
    			var qData = layout.qHyperCube.qDataPages[0];
@@ -172,7 +170,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 			d3.box = function() {
 			  var width = 1,
 			      height = 1,
-			      duration = 0,
+			      duration = 600,
 			      domain = null,
 			      value = Number,
 			      whiskers = boxWhiskers,
