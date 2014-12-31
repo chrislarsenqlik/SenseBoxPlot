@@ -634,7 +634,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 					.attr("dy", ".71em")
 			        .style("text-anchor", "middle")
 					.style("font-size", "16px") 
-			        .text("Quarter"); 
+			        .text(xAxisTitle); 
 
 
 			// Returns a function to compute the interquartile range.
