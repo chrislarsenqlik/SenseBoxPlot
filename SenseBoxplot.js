@@ -656,3 +656,4 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 		
 	};
 });
+ 
