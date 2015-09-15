@@ -1,4 +1,4 @@
-define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property-resolver", "translator"], function ($, cssContent, d3, a, d) {
+define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property-resolver", "translator"], function ($, cssContent, d3, propresolve, trans) {
 	'use strict';
 	$("<style>").html(cssContent).appendTo("head");
 	return {
@@ -95,10 +95,10 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property
 									},
 									change : function (b) {
 										var c,
-										d = a.getValue(b, "qOtherTotalSpec.qOtherMode");
-										"OTHER_REL_LIMITED" === d ? (c = a.getValue(b, "qOtherTotalSpec.qOtherLimit.qv", "0"), c.length && "%" !== c[c.length - 1] && g.isNumeric(c) && (b.qOtherTotalSpec.qOtherLimit || a.setValue(b, "qOtherTotalSpec.qOtherLimit", {
+										d = propresolve.getValue(b, "qOtherTotalSpec.qOtherMode");
+										"OTHER_REL_LIMITED" === d ? (c = propresolve.getValue(b, "qOtherTotalSpec.qOtherLimit.qv", "0"), c.length && "%" !== c[c.length - 1] && g.isNumeric(c) && (b.qOtherTotalSpec.qOtherLimit || propresolve.setValue(b, "qOtherTotalSpec.qOtherLimit", {
 													qv : "0"
-												}), b.qOtherTotalSpec.qOtherLimit.qv = c + "%")) : "OTHER_ABS_LIMITED" === d && (c = a.getValue(b, "qOtherTotalSpec.qOtherLimit.qv", "0"), c.length && "%" === c[c.length - 1] && (b.qOtherTotalSpec.qOtherLimit || a.setValue(b, "qOtherTotalSpec.qOtherLimit", {
+												}), b.qOtherTotalSpec.qOtherLimit.qv = c + "%")) : "OTHER_ABS_LIMITED" === d && (c = propresolve.getValue(b, "qOtherTotalSpec.qOtherLimit.qv", "0"), c.length && "%" === c[c.length - 1] && (b.qOtherTotalSpec.qOtherLimit || propresolve.setValue(b, "qOtherTotalSpec.qOtherLimit", {
 													qv : "0"
 												}), b.qOtherTotalSpec.qOtherLimit.qv = c.substr(0, c.length - 1)))
 									}
@@ -117,7 +117,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property
 									],
 									defaultValue : "OTHER_SORT_DESCENDING",
 									show : function (b, c) {
-										return "OTHER_COUNTED" === a.getValue(b, "qOtherTotalSpec.qOtherMode") && c.getMeasures().length > 0
+										return "OTHER_COUNTED" === propresolve.getValue(b, "qOtherTotalSpec.qOtherMode") && c.getMeasures().length > 0
 									}
 								},
 								otherCounted : {
@@ -128,7 +128,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property
 										qv : "10"
 									},
 									show : function (b, c) {
-										return "OTHER_COUNTED" === a.getValue(b, "qOtherTotalSpec.qOtherMode") && c.getMeasures().length > 0
+										return "OTHER_COUNTED" === propresolve.getValue(b, "qOtherTotalSpec.qOtherMode") && c.getMeasures().length > 0
 									}
 								},
 								otherLimitMode : {
@@ -157,7 +157,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property
 									icon : !0,
 									smallIconFont : !0,
 									show : function (b, c) {
-										var d = a.getValue(b, "qOtherTotalSpec.qOtherMode");
+										var d = propresolve.getValue(b, "qOtherTotalSpec.qOtherMode");
 										return ("OTHER_ABS_LIMITED" === d || "OTHER_REL_LIMITED" === d) && c.getMeasures().length > 0
 									}
 								},
@@ -169,7 +169,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property
 										qv : "0"
 									},
 									show : function (b, c) {
-										var d = a.getValue(b, "qOtherTotalSpec.qOtherMode");
+										var d = propresolve.getValue(b, "qOtherTotalSpec.qOtherMode");
 										return ("OTHER_ABS_LIMITED" === d || "OTHER_REL_LIMITED" === d) && c.getMeasures().length > 0
 									}
 								},
@@ -177,10 +177,10 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property
 									component : "text",
 									label : function (a, b) {
 										var c = b.getMeasureLayouts()[0];
-										return c ? d.get("Properties.DimensionLimits.CalculatedAgainst", c.qFallbackTitle) : d.get("Properties.DimensionLimits.NoMeasure")
+										return c ? trans.get("Properties.DimensionLimits.CalculatedAgainst", c.qFallbackTitle) : trans.get("Properties.DimensionLimits.NoMeasure")
 									},
 									show : function (b) {
-										var c = a.getValue(b, "qOtherTotalSpec.qOtherMode");
+										var c = propresolve.getValue(b, "qOtherTotalSpec.qOtherMode");
 										return "OTHER_OFF" !== c
 									}
 								}
@@ -196,7 +196,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property
 									inverted : !0,
 									defaultValue : !1,
 									show : function (b, c) {
-										return "OTHER_OFF" !== a.getValue(b, "qOtherTotalSpec.qOtherMode") && c.getMeasures().length > 0
+										return "OTHER_OFF" !== propresolve.getValue(b, "qOtherTotalSpec.qOtherMode") && c.getMeasures().length > 0
 									}
 								},
 								othersLabel : {
@@ -205,10 +205,10 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min", "general.utils/property
 									ref : "qDef.othersLabel",
 									translation : "properties.dimensionLimits.othersLabel",
 									defaultValue : function () {
-										return d.get("properties.dimensionLimits.others")
+										return trans.get("properties.dimensionLimits.others")
 									},
 									show : function (b, c) {
-										return !a.getValue(b, "qOtherTotalSpec.qSuppressOther") && "OTHER_OFF" !== a.getValue(b, "qOtherTotalSpec.qOtherMode") && c.getMeasures().length > 0
+										return !propresolve.getValue(b, "qOtherTotalSpec.qSuppressOther") && "OTHER_OFF" !== propresolve.getValue(b, "qOtherTotalSpec.qOtherMode") && c.getMeasures().length > 0
 									}
 								}
 							}
