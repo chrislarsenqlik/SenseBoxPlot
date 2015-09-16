@@ -4,6 +4,6 @@
 	"icon" : "extension",
 	"type" : "visualization",
 	"version": "1.0",
-	"preview" : "table",
+	"preview" : "boxplot.png",
 	"author": "Chris Larsen, Qlik"
 }
