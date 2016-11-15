@@ -9,8 +9,11 @@ In order to be able to replicate exactly what Bostock did and see they match, I 
 
 ### Versions
 1.0 - Release
+
 1.1 - Add optional outlier on / off toggle
+
 1.2 - Make x and y axis labels dynamic based on first and second chosen dimensions
+
 
 ### Original Source
 This was adapted from Mike Bostock's D3 Boxplot [here].
