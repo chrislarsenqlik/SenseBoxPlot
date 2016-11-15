@@ -89,7 +89,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 
    			//Bring in Data
    			var qData = layout.qHyperCube.qDataPages[0];
-   			console.log('xAxis Title',layout.qHyperCube.qDimensionInfo[0].qFallbackTitle);
+   			//console.log('xAxis Title',layout.qHyperCube.qDimensionInfo[0].qFallbackTitle);
    			var xAxisName = layout.qHyperCube.qDimensionInfo[0].qFallbackTitle;
    			var yAxisName = layout.qHyperCube.qDimensionInfo[1].qFallbackTitle;
 			var qMatrix = qData.qMatrix;
