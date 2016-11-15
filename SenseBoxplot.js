@@ -89,6 +89,9 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 
    			//Bring in Data
    			var qData = layout.qHyperCube.qDataPages[0];
+   			console.log('xAxis Title',layout.qHyperCube.qDimensionInfo[0].qFallbackTitle);
+   			var xAxisName = layout.qHyperCube.qDimensionInfo[0].qFallbackTitle;
+   			var yAxisName = layout.qHyperCube.qDimensionInfo[1].qFallbackTitle;
 			var qMatrix = qData.qMatrix;
 
 			var source = qMatrix.map(function(d) {
@@ -499,7 +502,7 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 
 			var labels = true; // show the text labels beside individual boxplots?
 
-			var margin = {top: 30, right: 50, bottom: 70, left: 50};
+			var margin = {top: 30, right: 50, bottom: 90, left: 50};
 			var width = $element.width() - margin.left - margin.right;
 			var height = $element.height() - margin.top - margin.bottom;
 			// console.log('width: '+width)
@@ -609,14 +612,14 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 			      .call(chart.width(x.rangeBand())); 
 				
 				      
-				// add a title
-				svg.append("text")
-			        .attr("x", (width / 2))             
-			        .attr("y", 0 + (margin.top / 2))
-			        .attr("text-anchor", "middle")  
-			        .style("font-size", "18px") 
-			        //.style("text-decoration", "underline")  
-			        .text("Revenue");
+				// // add a title
+				// svg.append("text")
+			 //        .attr("x", (width / 2))             
+			 //        .attr("y", 0 + (margin.top / 2))
+			 //        .attr("text-anchor", "middle")  
+			 //        .style("font-size", "18px") 
+			 //        //.style("text-decoration", "underline")  
+			 //        .text("Revenue");
 			 
 				 // draw y axis
 				svg.append("g")
@@ -624,11 +627,12 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 			        .call(yAxis)
 					.append("text") // and text1
 					  .attr("transform", "rotate(-90)")
-					  .attr("y", 6)
+					  .attr("y", -50)
+					  .attr("x", -130)
 					  .attr("dy", ".71em")
 					  .style("text-anchor", "end")
 					  .style("font-size", "16px") 
-					  .text("");		
+					  .text(yAxisName);		
 				
 				// draw x axis	
 				svg.append("g")
@@ -637,11 +641,11 @@ define(["jquery", "text!./SenseBoxplot.css", "./d3.min"], function($, cssContent
 			      .call(xAxis)
 				  .append("text")             // text label for the x axis
 			        .attr("x", (width / 2) )
-			        .attr("y",  10 )
+			        .attr("y",  30 )
 					.attr("dy", ".71em")
 			        .style("text-anchor", "middle")
 					.style("font-size", "16px") 
-			        .text("Quarter"); 
+			        .text(xAxisName); 
 
 
 			// Returns a function to compute the interquartile range.
